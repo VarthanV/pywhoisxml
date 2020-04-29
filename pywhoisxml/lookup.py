@@ -1,11 +1,11 @@
-
 from pywhoisxml.conf import URL_DEFAULTS, get_response
+from pywhoisxml.auth import Auth
 from pywhoisxml.exceptions import PyWhoisException
 
 
-class Lookup():
+class Lookup(Auth):
     def __init__(self, api_key, domain):
-        self.api_key = api_key
+        super().__init__(api_key)
         self.domain = domain
         self.url = URL_DEFAULTS.get('lookup_url')
         self.params = {
