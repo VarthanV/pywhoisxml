@@ -5,7 +5,9 @@ URL_DEFAULTS = {
     "email_verification":"https://emailverification.whoisxmlapi.com/api/v1",
     "screenshot":"https://website-screenshot.whoisxmlapi.com/api/v1",
     "ip_address":"https://ip-geolocation.whoisxmlapi.com/api/v1",
-    "reputation":"https://domain-reputation.whoisxmlapi.com/api/v1"
+    "reputation":"https://domain-reputation.whoisxmlapi.com/api/v1",
+    "balance":"https://user.whoisxmlapi.com/service/account-balance",
+    "dns_lookup":"https://www.whoisxmlapi.com/whoisserver/DNSService"
 }
 
 
@@ -21,3 +23,12 @@ def get_response(url, params):
   
 def return_value(response,key):
         return response.get(key)
+
+def get_balance(api_key,code):
+    res = requests.get("https://user.whoisxmlapi.com/service/account-balance",params={"apiKey":api_key}).json()
+    res= res.get('data')
+    for item in res :
+        if item['product_id'] == code:
+            return item.get('credits')
+    return None    
+

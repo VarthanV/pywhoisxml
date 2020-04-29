@@ -1,10 +1,11 @@
-from pywhoisxml.conf import URL_DEFAULTS, get_response,return_value
+from pywhoisxml.conf import URL_DEFAULTS, get_response,return_value,get_balance
 from pywhoisxml.exceptions import PyWhoisException
 
 class IpGeo(object):
     def __init__(self,api_key,ip_address,output_format = "JSON",**kwargs):
         self.api_key = api_key
         self.ip_address  = ip_address
+        self.code = 8
         self.url=URL_DEFAULTS.get('ip_address')
         self.params = {
             "apiKey":api_key,
@@ -18,7 +19,10 @@ class IpGeo(object):
      
     @property
     def country(self):
-        return return_value(self.filtered_response,'country')  
+        return return_value(self.filtered_response,'country') 
+    @property    
+    def balance(self): 
+        return get_balance(self.api_key,self.code)       
     @property
     def region(self):
         return return_value(self.filtered_response,'region')

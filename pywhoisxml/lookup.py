@@ -1,12 +1,14 @@
-from pywhoisxml.conf import URL_DEFAULTS, get_response
+from pywhoisxml.conf import URL_DEFAULTS, get_response, get_balance
 from pywhoisxml.auth import Auth
 from pywhoisxml.exceptions import PyWhoisException
 
 
 class Lookup(object):
-    def __init__(self, api_key, domain,output_format = "JSON",**kwargs):
-        self.api_key= api_key
+    def __init__(self, api_key, domain, output_format="JSON", **kwargs):
+        self.api_key = api_key
         self.domain = domain
+        self.code = 1
+
         self.url = URL_DEFAULTS.get('lookup_url')
         self.params = {
             "apiKey": self.api_key,
@@ -26,6 +28,9 @@ class Lookup(object):
             return False
         except Exception as e:
             raise PyWhoisException("Enter a valid domain")
+    @property    
+    def balance(self): 
+        return get_balance(self.api_key,self.code)   
 
     @property
     def data(self):
@@ -53,4 +58,3 @@ class Lookup(object):
     @property
     def raw_text(self):
         return self.response['rawText']
-
