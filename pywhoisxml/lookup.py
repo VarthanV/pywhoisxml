@@ -3,17 +3,18 @@ from pywhoisxml.auth import Auth
 from pywhoisxml.exceptions import PyWhoisException
 
 
-class Lookup(Auth):
-    def __init__(self, api_key, domain):
+class Lookup(object):
+    def __init__(self, api_key, domain,output_format = "JSON",**kwargs):
         self.api_key= api_key
         self.domain = domain
         self.url = URL_DEFAULTS.get('lookup_url')
         self.params = {
             "apiKey": self.api_key,
-            "outputFormat": "JSON",
+            "outputFormat": output_format,
             "domainName": domain,
             "da": 1
         }
+        self.params.update(kwargs)
         self.response = get_response(self.url, self.params)['WhoisRecord']
         self.is_com = self.check_is_com()
 
