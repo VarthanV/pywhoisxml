@@ -25,6 +25,7 @@ class Lookup(Auth):
             return False
         except Exception as e:
             raise PyWhoisException("Enter a valid domain")
+
     @property
     def data(self):
         return self.response
@@ -33,8 +34,8 @@ class Lookup(Auth):
     def registered_by(self):
         if self.is_com:
 
-           return self.response["registrant"]["organization"]
-        return self.response['registrarName']  
+            return self.response["registrant"]["organization"]
+        return self.response['registrarName']
 
     @property
     def is_available(self):
@@ -42,13 +43,13 @@ class Lookup(Auth):
             return False
         return True
 
-    @property 
+    @property
     def created_at(self):
         if self.is_com:
-           return self.response['createdDate']   
+            return self.response['createdDate']
         return self.response['audit']['createdDate']
+
     @property
     def raw_text(self):
-        return self.response['rawText']    
-
+        return self.response['rawText']
 
