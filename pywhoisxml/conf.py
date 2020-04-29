@@ -7,7 +7,8 @@ URL_DEFAULTS = {
     "ip_address":"https://ip-geolocation.whoisxmlapi.com/api/v1",
     "reputation":"https://domain-reputation.whoisxmlapi.com/api/v1",
     "balance":"https://user.whoisxmlapi.com/service/account-balance",
-    "dns_lookup":"https://www.whoisxmlapi.com/whoisserver/DNSService"
+    "dns_lookup":"https://www.whoisxmlapi.com/whoisserver/DNSService",
+    "contacts_list":"https://website-contacts.whoisxmlapi.com/api/v1"
 }
 
 
