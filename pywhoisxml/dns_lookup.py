@@ -1,12 +1,14 @@
-from pywhoisxml.conf import URL_DEFAULTS, get_response, return_value, get_balance
+from pywhoisxml.conf import URL_DEFAULTS, get_response, return_value
 from pywhoisxml.exceptions import PyWhoisException
+from pywhoisxml.auth import Auth
 
 
-class DnsLookup(object):
+class DnsLookup(Auth):
     def __init__(self, api_key, domain, output_format="JSON", **kwargs):
-        self.domain = domain
-        self.api_key = api_key
         self.code = 26
+        super(Auth).__init__(api_key, self.code)
+        self.domain = domain
+
         self.url = URL_DEFAULTS.get("dns_lookup")
         self.params = {
             "apiKey": self.api_key,
@@ -16,9 +18,6 @@ class DnsLookup(object):
         }
         self.params.update(kwargs)
         self.response = get_response(self.url, self.params)
-    @property    
-    def balance(self): 
-        return get_balance(self.api_key,self.code)       
 
     @property
     def types(self):

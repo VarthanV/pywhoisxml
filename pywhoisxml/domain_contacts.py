@@ -1,12 +1,14 @@
-from pywhoisxml.conf import URL_DEFAULTS, get_response, return_value, get_balance
+from pywhoisxml.conf import URL_DEFAULTS, get_response, return_value
 from pywhoisxml.exceptions import PyWhoisException
+from pywhoisxml.auth import Auth
 
 
 class DomainContacts(object):
     def __init__(self, api_key, domain, output_format="JSON", **kwargs):
-        self.api_key = api_key
-        self.domain = domain
         self.code = 20
+        super().__init__(api_key, self.code)
+        self.domain = domain
+
         self.url = URL_DEFAULTS.get('reputation')
         self.params = {
             "apiKey": api_key,
@@ -44,7 +46,3 @@ class DomainContacts(object):
     @property
     def twitter_link(self):
         return self.response['socialLinks']['twitter']
-
-    @property
-    def balance(self):
-        return get_balance(self.api_key, self.code)

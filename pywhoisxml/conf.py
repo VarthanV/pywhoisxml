@@ -25,11 +25,5 @@ def get_response(url, params):
 def return_value(response,key):
         return response.get(key)
 
-def get_balance(api_key,code):
-    res = requests.get("https://user.whoisxmlapi.com/service/account-balance",params={"apiKey":api_key}).json()
-    res= res.get('data')
-    for item in res :
-        if item['product_id'] == code:
-            return item.get('credits')
-    return None    
 
+  

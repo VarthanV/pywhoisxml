@@ -1,27 +1,32 @@
-from pywhoisxml.conf import URL_DEFAULTS, get_response, return_value,get_balance
+from pywhoisxml.conf import URL_DEFAULTS, get_response, return_value
 from pywhoisxml.exceptions import PyWhoisException
+from pywhoisxml.auth import Auth
 
 
-class DomainReputation(object):
+class DomainReputation(Auth):
     def __init__(self, api_key, domain, output_format="JSON", **kwargs):
-        self.api_key = api_key
-        self.domain = domain
         self.code = 20
+        super().__init__(api_key, self.code)
+        self.domain = domain
+
         self.url = URL_DEFAULTS.get('reputation')
         self.params = {
-            "apiKey": api_key,
+            "apiKey": self.api_key,
             "outputFormat": output_format,
             "domainName": domain
 
         }
         self.params.update(kwargs)
         self.response = get_response(self.url, self.params)
+
     @property
     def data(self):
-         return self.response   
+        return self.response
+
     @property
     def score(self):
-        return return_value(self.response,"reputationScore")
-    @property    
-    def balance(self): 
-        return get_balance(self.api_key,self.code)       
+        return return_value(self.response, "reputationScore")
+
+    @property
+    def balance(self):
+        return get_balance(self.api_key, self.code)
