@@ -5,7 +5,7 @@ from pywhoisxml.exceptions import PyWhoisException
 
 class Lookup(Auth):
     def __init__(self, api_key, domain):
-        super().__init__(api_key)
+        self.api_key= api_key
         self.domain = domain
         self.url = URL_DEFAULTS.get('lookup_url')
         self.params = {
