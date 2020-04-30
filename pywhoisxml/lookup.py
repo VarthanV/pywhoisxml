@@ -1,4 +1,4 @@
-from pywhoisxml.conf import URL_DEFAULTS, get_response
+from pywhoisxml.conf import URL_DEFAULTS
 from pywhoisxml.auth import Auth
 from pywhoisxml.exceptions import PyWhoisException
 
@@ -14,7 +14,7 @@ class Lookup(Auth):
             "da":1,
             "domainName":domain
         })
-        self.response = get_response(self.url, self.params)['WhoisRecord']
+        self.response = self.get_response(self.url, self.params)['WhoisRecord']
         self.is_com = self.check_is_com()
 
     def check_is_com(self):

@@ -1,4 +1,4 @@
-from pywhoisxml.conf import URL_DEFAULTS, get_response, return_value
+from pywhoisxml.conf import URL_DEFAULTS,return_value
 from pywhoisxml.exceptions import PyWhoisException
 from pywhoisxml.auth import Auth
 
@@ -15,7 +15,7 @@ class DomainReputation(Auth):
         self.params.update({
             "domainName": domain
         })
-        self.response = get_response(self.url, self.params)
+        self.response = self.get_response(self.url, self.params)
 
     @property
     def data(self):

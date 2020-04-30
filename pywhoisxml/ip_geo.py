@@ -1,4 +1,4 @@
-from pywhoisxml.conf import URL_DEFAULTS, get_response, return_value
+from pywhoisxml.conf import URL_DEFAULTS, return_value
 from pywhoisxml.exceptions import PyWhoisException
 from pywhoisxml.auth import Auth
 
@@ -14,7 +14,7 @@ class IpGeo(Auth):
         self.params.update({
             "ipAddress": self.ip_address
         })
-        self.response = get_response(self.url, self.params)
+        self.response = self.get_response(self.url, self.params)
         self.filtered_response = self.response['location']
 
     @property

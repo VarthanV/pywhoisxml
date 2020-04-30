@@ -20,3 +20,13 @@ class Auth(object):
          if item['product_id'] == self.code:
             return item.get('credits')
         return None
+    def get_response(self,url, params):
+        response = requests.get(url, params=params)
+        response = response.json()
+
+        if not 'Error' in response:
+            return response
+        else :    
+         raise PyWhoisException(
+            "Make sure you have passed the right params ,Please Try again later",response)
+        

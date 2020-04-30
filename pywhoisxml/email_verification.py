@@ -1,4 +1,4 @@
-from pywhoisxml.conf import URL_DEFAULTS, get_response, return_value
+from pywhoisxml.conf import URL_DEFAULTS, return_value
 from pywhoisxml.exceptions import PyWhoisException
 from pywhoisxml.auth import Auth
 #"emailAddress": email
@@ -13,7 +13,7 @@ class EmailVerification(Auth):
         self.params.update({
             "emailAddress":self.email
         })
-        self.response = get_response(self.url, self.params)
+        self.response = self.get_response(self.url, self.params)
         self.balance = get_balance(self.api_key, self.code)
 
     @property
