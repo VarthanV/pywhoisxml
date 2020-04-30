@@ -4,10 +4,11 @@ import requests
 import base64
 from pywhoisxml.auth import Auth
 
+
 class Screenshot(Auth):
     def __init__(self, api_key, **kwargs):
-        self.code= 27
-        super().__init__(api_key,self.code)
+        self.code = 27
+        super().__init__(api_key, self.code)
         self.url = URL_DEFAULTS.get('screenshot')
         self.params = {
             "apiKey": self.api_key,

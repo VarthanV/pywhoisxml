@@ -4,19 +4,16 @@ from pywhoisxml.auth import Auth
 
 
 class IpGeo(Auth):
-    def __init__(self, api_key, ip_address, output_format="JSON", **kwargs):
+    def __init__(self, api_key, ip_address, **kwargs):
         self.code = 8
-        super().__init__(api_key, self.code)
+        super().__init__(api_key, self.code, **kwargs)
         self.ip_address = ip_address
 
         self.url = URL_DEFAULTS.get('ip_address')
-        self.params = {
-            "apiKey": api_key,
-            "outputFormat": output_format,
+        self.params = self.default_params
+        self.params.update({
             "ipAddress": self.ip_address
-
-        }
-        self.params.update(kwargs)
+        })
         self.response = get_response(self.url, self.params)
         self.filtered_response = self.response['location']
 

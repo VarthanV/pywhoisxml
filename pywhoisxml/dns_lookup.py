@@ -4,19 +4,16 @@ from pywhoisxml.auth import Auth
 
 
 class DnsLookup(Auth):
-    def __init__(self, api_key, domain, output_format="JSON", **kwargs):
+    def __init__(self, api_key, domain, **kwargs):
         self.code = 26
-        super(Auth).__init__(api_key, self.code)
+        super().__init__(api_key, self.code,**kwargs)
         self.domain = domain
 
         self.url = URL_DEFAULTS.get("dns_lookup")
-        self.params = {
-            "apiKey": self.api_key,
-            "outputFormat": output_format,
-            "domainName": domain
-
-        }
-        self.params.update(kwargs)
+        self.params =self.default_params
+        self.params.update({
+            "domainName":self.domain
+        })
         self.response = get_response(self.url, self.params)
 
     @property

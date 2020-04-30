@@ -2,9 +2,14 @@ from pywhoisxml.exceptions import PyWhoisException
 import requests
 
 class Auth(object):
-    def __init__(self, api_key, code):
+    def __init__(self, api_key, code,**kwargs):
         self.api_key = api_key
         self.code = code
+        self.default_params = {
+            "apiKey":api_key,
+            "outputFormat":"JSON"
+        }
+        self.default_params.update(kwargs)
 
     @property
     def balance(self):

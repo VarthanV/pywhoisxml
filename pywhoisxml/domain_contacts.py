@@ -4,19 +4,16 @@ from pywhoisxml.auth import Auth
 
 
 class DomainContacts(object):
-    def __init__(self, api_key, domain, output_format="JSON", **kwargs):
+    def __init__(self, api_key, domain,**kwargs):
         self.code = 20
-        super().__init__(api_key, self.code)
+        super().__init__(api_key, self.code,**kwargs)
         self.domain = domain
 
         self.url = URL_DEFAULTS.get('reputation')
-        self.params = {
-            "apiKey": api_key,
-            "outputFormat": output_format,
+        self.params = self.defautf_params
+        self.params.update({
             "domainName": domain
-
-        }
-        self.params.update(kwargs)
+        })
         self.response = get_response(self.url, self.params)
 
     @property

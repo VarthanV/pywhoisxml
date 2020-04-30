@@ -1,20 +1,18 @@
 from pywhoisxml.conf import URL_DEFAULTS, get_response, return_value
 from pywhoisxml.exceptions import PyWhoisException
 from pywhoisxml.auth import Auth
-
+#"emailAddress": email
 
 class EmailVerification(Auth):
-    def __init__(self, api_key, email, output_format="JSON", **kwargs):
+    def __init__(self, api_key, email,**kwargs):
         self.code = 7
-        super().__init__(api_key=api_key, self.code)
-
+        super().__init__(api_key, self.code,**kwargs)
+        self.email =email
         self.url = URL_DEFAULTS.get("email_verification")
-        self.params = {
-            "apiKey": self.api_key,
-            "outputFormat": output_format,
-            "emailAddress": email
-        }
-        self.params.update(kwargs)
+        self.params = self.default_params
+        self.params.update({
+            "emailAddress":self.email
+        })
         self.response = get_response(self.url, self.params)
         self.balance = get_balance(self.api_key, self.code)
 
