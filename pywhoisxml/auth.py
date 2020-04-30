@@ -2,7 +2,10 @@ from pywhoisxml.exceptions import PyWhoisException
 import requests
 
 class Auth(object):
+    
     def __init__(self, api_key, code,**kwargs):
+
+        
         self.api_key = api_key
         self.code = code
         self.default_params = {
