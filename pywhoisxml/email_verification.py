@@ -14,8 +14,6 @@ class EmailVerification(Auth):
             "emailAddress":self.email
         })
         self.response = self.get_response(self.url, self.params)
-        self.balance = get_balance(self.api_key, self.code)
-
     @property
     def data(self):
         return self.response

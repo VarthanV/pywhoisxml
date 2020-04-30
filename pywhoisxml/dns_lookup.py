@@ -18,8 +18,8 @@ class DnsLookup(Auth):
 
     @property
     def types(self):
-        return get_response(self.response, 'types')
+        return return_value(self.response, 'types')
 
     @property
     def dns_records(self):
-        return get_response(self.response, 'dnsRecords')
+        return return_value(self.response, 'dnsRecords')
