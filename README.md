@@ -7,7 +7,7 @@ api service . It offers many helper methods to get the commonly used data's easi
 ### From PyPI
 
 ```bash
-pip install pywhoisxml
+pip install py3whoisxml
 ```
 ### Whois Lookup Usage
 
